@@ -8,22 +8,22 @@ import jakarta.persistence.*;
 @Getter @Setter
 @Entity
 @Table(name ="empleados")
-
 public class Empleado {
 
     public Empleado() {
 
     }
 
-    public Empleado(Long id, String nombre, String apellido, String email) {
+    public Empleado(Long id, String nombre, String apellido, String email, Empresa empresa) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.empresa = empresa;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
@@ -37,6 +37,10 @@ public class Empleado {
 
     @Column(name="email",length = 60,nullable = false,unique = true)
     private String email;
+
+    @ManyToOne
+    @JoinColumn (name="id_empresa")
+    private Empresa empresa;
 
 
 }
